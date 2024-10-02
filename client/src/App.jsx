@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
           'Content-Type': 'multipart/form-data',
         },
       });
-      setDescription(response.data.description);
+      setDescription(response.data.description.generated_text); 
     } catch (error) {
       console.error('Error uploading image:', error);
     }
