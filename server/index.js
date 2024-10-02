@@ -57,6 +57,15 @@ app.post("/upload", upload.single("image"), async (req, res) => {
   }
 });
 
+app.get("/images", async (req, res) => {
+  try {
+    const images = await Image.find().sort({ createdAt: -1 });
+    res.json(images);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
