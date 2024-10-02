@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  # Backend service
+  backend:
+    build:
+      context: ./server
+    ports:
+      - "3000:3000"
+
+  # Client service
+  client:
+    build:
+      context: ./client
+    ports:
+      - "80:80"
+
+networks:
+  default:
+    name: textractify-network
