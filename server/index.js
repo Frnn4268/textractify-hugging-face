@@ -10,9 +10,11 @@ config();
 const app = express();
 const upload = multer();
 
-app.use(cors({
-  origin: 'http://localhost:5173'
-}));
+app.use(
+  cors({
+    origin: '*',
+  })
+);
 
 // MongoDB connection
 connectDB();
