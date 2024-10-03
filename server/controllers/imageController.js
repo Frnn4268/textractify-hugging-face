@@ -3,6 +3,7 @@ const { HfInference } = require("@huggingface/inference");
 const Image = require("../models/Image");
 const fs = require('fs');
 const path = require('path');
+const bucket = require('../firebaseConfig'); 
 
 const hf = new HfInference(process.env.HG_ACCESS_TOKEN);
 
@@ -17,25 +18,31 @@ const uploadImage = async (req, res) => {
 
     console.log("Generated description:", result.generated_text);
 
-    // Generate audio from the description
     const textToSpeechResult = await hf.textToSpeech({
       model: 'espnet/kan-bayashi_ljspeech_vits',
       inputs: result.generated_text,
     });
 
-    // Ensure the audio directory exists
-    const audioDir = path.join(__dirname, 'public', 'audios');
-    if (!fs.existsSync(audioDir)) {
-      fs.mkdirSync(audioDir, { recursive: true });
+    // Ensure the temp directory exists
+    const tempDir = path.join(__dirname, '..', 'temp');
+    if (!fs.existsSync(tempDir)) {
+      fs.mkdirSync(tempDir, { recursive: true });
     }
-    
+
     // Save the audio file locally
     const audioFileName = `audio_${Date.now()}.flac`;
-    const audioFilePath = path.join(audioDir, audioFileName);
+    const audioFilePath = path.join(tempDir, audioFileName);
     fs.writeFileSync(audioFilePath, Buffer.from(await textToSpeechResult.arrayBuffer()));
 
-    // Generate the URL for the audio file
-    const audioUrl = `/audios/${audioFileName}`;
+    // Upload the audio file to Firebase Storage
+    await bucket.upload(audioFilePath, {
+      destination: `audios/${audioFileName}`,
+      public: true,
+      metadata: { contentType: 'audio/flac' }
+    });
+
+    // Get the public URL for the audio file
+    const audioUrl = `https://storage.googleapis.com/${bucket.name}/audios/${audioFileName}`;
 
     console.log("Generated audio URL:", audioUrl);
 
@@ -47,6 +54,9 @@ const uploadImage = async (req, res) => {
 
     await newImage.save();
     res.json({ description: result.generated_text, audioPath: audioUrl });
+
+    // Clean up the local file
+    fs.unlinkSync(audioFilePath);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
