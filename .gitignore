@@ -8,5 +8,6 @@ server/node_modules/
 client/.env
 server/.env
 
-# Multer uploads (si tienes una carpeta específica para esto)
+# Multer uploads
 uploads/
+server/controllers/public/audios/
