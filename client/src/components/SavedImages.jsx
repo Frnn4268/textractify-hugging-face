@@ -19,7 +19,7 @@ function SavedImages() {
 
   return (
     <div>
-      <h1>Saved Images</h1>
+      <h1>Saved Images!</h1>
       <ul>
         {images.map((image, index) => (
           <li key={index}>
