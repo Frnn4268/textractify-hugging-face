@@ -4,6 +4,7 @@ import axios from 'axios';
 function ImageCapture() {
   const [image, setImage] = useState(null);
   const [description, setDescription] = useState('');
+  const [audioUrl, setAudioUrl] = useState(''); 
   const [useFrontCamera, setUseFrontCamera] = useState(false);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
@@ -50,6 +51,7 @@ function ImageCapture() {
         },
       });
       setDescription(response.data.description);
+      setAudioUrl(response.data.audioPath); 
     } catch (error) {
       console.error('Error uploading image:', error);
     }
@@ -68,6 +70,7 @@ function ImageCapture() {
       <canvas ref={canvasRef} style={{ display: 'none' }} width="640" height="480"></canvas>
       {image && <img src={image} alt="Captured" style={{ maxWidth: '100%' }} />}
       {description && <p>{description}</p>}
+      {audioUrl && <audio controls src={audioUrl}></audio>} 
     </div>
   );
 }
