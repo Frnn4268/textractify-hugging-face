@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const imageSchema = new mongoose.Schema({
   description: String,
-  audioUrl: String,
   createdAt: {
     type: Date,
     default: Date.now,
