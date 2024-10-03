@@ -24,10 +24,6 @@ function SavedImages() {
         {images.map((image, index) => (
           <li key={index}>
             <p>{image.description}</p>
-            <audio controls>
-              <source src={image.audioUrl} type="audio/mpeg" />
-              Your browser does not support the audio element.
-            </audio>
             <p>{new Date(image.createdAt).toLocaleString()}</p>
           </li>
         ))}
