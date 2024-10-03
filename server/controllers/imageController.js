@@ -1,7 +1,12 @@
 const { HfInference } = require("@huggingface/inference");
 const Image = require("../models/Image");
+const { TextToSpeechClient } = require('@google-cloud/text-to-speech'); // Ejemplo con Google Text-to-Speech
+const fs = require('fs');
+const util = require('util');
+const path = require('path');
 
 const hf = new HfInference(process.env.HG_ACCESS_TOKEN);
+const ttsClient = new TextToSpeechClient();
 
 const uploadImage = async (req, res) => {
   try {
@@ -13,14 +18,29 @@ const uploadImage = async (req, res) => {
       model,
     });
 
-    // Save the description in the database
+    const description = result.generated_text;
+
+    // Generate audio from the description
+    const [response] = await ttsClient.synthesizeSpeech({
+      input: { text: description },
+      voice: { languageCode: 'en-US', ssmlGender: 'NEUTRAL' },
+      audioConfig: { audioEncoding: 'MP3' },
+    });
+
+    // Save the audio file
+    const audioFileName = `${Date.now()}.mp3`;
+    const audioFilePath = path.join(__dirname, '..', 'public', 'audio', audioFileName);
+    await util.promisify(fs.writeFile)(audioFilePath, response.audioContent, 'binary');
+
+    // Guardar la descripción y la URL del audio en la base de datos
     const newImage = new Image({
-      description: result.generated_text,
+      description,
+      audioUrl: `/public/audio/${audioFileName}`,
     });
 
     await newImage.save();
 
-    res.json({ description: result.generated_text });
+    res.json({ description, audioUrl: newImage.audioUrl });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
