@@ -1,7 +1,6 @@
-// src/components/ImageRow.jsx
 import React from 'react';
 
-const ImageRow = ({ image }) => {
+const ImageRow = ({ image, onDelete }) => {
   return (
     <tr>
       <td>{image.description}</td>
@@ -10,6 +9,9 @@ const ImageRow = ({ image }) => {
         <a href={image.imagePath} target="_blank" rel="noopener noreferrer">
           <img src={image.imagePath} alt={image.description} style={{ width: '100px', height: 'auto' }} />
         </a>
+      </td>
+      <td>
+        <button onClick={() => onDelete(image._id)}>Delete</button>
       </td>
     </tr>
   );
