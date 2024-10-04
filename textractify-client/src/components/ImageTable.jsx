@@ -8,6 +8,7 @@ const ImageTable = ({ images }) => {
         <tr>
           <th>Description</th>
           <th>Audio URL</th>
+          <th>Image</th>
         </tr>
       </thead>
       <tbody>

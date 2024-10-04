@@ -46,17 +46,36 @@ const uploadImage = async (req, res) => {
 
     console.log("Generated audio URL:", audioUrl);
 
-    // Save the description and audio URL in the database
+    // Save the image file locally
+    const imageFileName = `image_${Date.now()}.jpg`;
+    const imageFilePath = path.join(tempDir, imageFileName);
+    fs.writeFileSync(imageFilePath, blob);
+
+    // Upload the image file to Firebase Storage
+    await bucket.upload(imageFilePath, {
+      destination: `images/${imageFileName}`,
+      public: true,
+      metadata: { contentType: 'image/jpeg' }
+    });
+
+    // Get the public URL for the image file
+    const imageUrl = `https://storage.googleapis.com/${bucket.name}/images/${imageFileName}`;
+
+    console.log("Generated image URL:", imageUrl);
+
+    // Save the description, audio URL, and image URL in the database
     const newImage = new Image({
       description: result.generated_text,
-      audioPath: audioUrl // Ensure this is the correct path or URL
+      audioPath: audioUrl,
+      imagePath: imageUrl // Save the image URL
     });
 
     await newImage.save();
-    res.json({ description: result.generated_text, audioPath: audioUrl });
+    res.json({ description: result.generated_text, audioPath: audioUrl, imagePath: imageUrl });
 
-    // Clean up the local file
+    // Clean up the local files
     fs.unlinkSync(audioFilePath);
+    fs.unlinkSync(imageFilePath);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
