@@ -22,7 +22,7 @@ function App() {
   return (
     <div className="App">
       <h1>Image Descriptions and Audio URLs</h1>
-      <ImageTable images={images} />
+      <ImageTable images={images} setImages={setImages} />
     </div>
   );
 }

@@ -7,6 +7,15 @@ const bucket = require('../firebaseConfig');
 
 const hf = new HfInference(process.env.HG_ACCESS_TOKEN);
 
+const getImages = async (req, res) => {
+  try {
+    const images = await Image.find().sort({ createdAt: -1 });
+    res.json(images);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 const uploadImage = async (req, res) => {
   try {
     const blob = req.file.buffer;
@@ -81,10 +90,27 @@ const uploadImage = async (req, res) => {
   }
 };
 
-const getImages = async (req, res) => {
+const deleteImage = async (req, res) => {
   try {
-    const images = await Image.find().sort({ createdAt: -1 });
-    res.json(images);
+    const { id } = req.params;
+    const image = await Image.findById(id);
+
+    if (!image) {
+      return res.status(404).json({ error: 'Image not found' });
+    }
+
+    // Delete audio file from Firebase Storage
+    const audioFileName = path.basename(image.audioPath);
+    await bucket.file(`audios/${audioFileName}`).delete();
+
+    // Delete image file from Firebase Storage
+    const imageFileName = path.basename(image.imagePath);
+    await bucket.file(`images/${imageFileName}`).delete();
+
+    // Delete the image record from the database
+    await Image.findByIdAndDelete(id);
+
+    res.json({ message: 'Image deleted successfully' });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -93,4 +119,5 @@ const getImages = async (req, res) => {
 module.exports = {
   uploadImage,
   getImages,
+  deleteImage,
 };
