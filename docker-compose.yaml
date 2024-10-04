@@ -14,6 +14,13 @@ services:
       context: ./client
     ports:
       - "80:80"
+  
+  # Client Textractify service
+  textractify-client:
+    build:
+      context: ./textractify-client
+    ports:
+      - "81:81"
 
 networks:
   default:
