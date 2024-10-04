@@ -7,6 +7,7 @@ const imageSchema = new mongoose.Schema({
     default: Date.now,
   },
   audioPath: String, 
+  imagePath: String,
 });
 
 const Image = mongoose.model("Image", imageSchema);
