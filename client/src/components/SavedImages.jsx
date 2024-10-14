@@ -23,7 +23,7 @@ function SavedImages() {
       <ul>
         {images.map((image, index) => (
           <li key={index}>
-            <p>{image.description}</p>
+            <p>Description: {image.description}</p>
             <p>{new Date(image.createdAt).toLocaleString()}</p>
           </li>
         ))}
