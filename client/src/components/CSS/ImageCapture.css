@@ -1,0 +1,107 @@
+.image-capture-container {
+    text-align: center;
+    padding: 20px;
+    background-image: url('https://png.pngtree.com/background/20230413/original/pngtree-dreamy-clouds-colorful-clouds-cartoon-illustration-sky-cute-background-picture-image_2422909.jpg');
+    background-size: cover;
+    background-position: center;
+    border-radius: 25px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+    margin: 40px auto;
+    font-family: 'Patrick Hand', cursive; 
+}
+
+.title {
+    font-size: 3rem;
+    color: #ff4500;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px #ffa07a;
+    animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.video-stream {
+    border: 6px solid #32cd32;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.buttons-container {
+    margin-top: 15px;
+}
+
+.capture-button, .toggle-button {
+    background-color: #ffeb3b; 
+    color: #333;
+    border: none;
+    padding: 15px 25px;
+    font-size: 1.5rem;
+    border-radius: 15px;
+    cursor: pointer;
+    margin: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    display: inline-flex; 
+    align-items: center; 
+    justify-content: center; 
+    transform: translateY(0); 
+}
+
+.capture-button:hover, .toggle-button:hover {
+    background-color: #ffd700; 
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px); 
+}
+
+
+.capture-button:active, .toggle-button:active {
+    transform: translateY(0); 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+
+.captured-image {
+    margin-top: 20px;
+    max-width: 100%;
+    border: 5px solid #ff6347; 
+    border-radius: 25px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    animation: popIn 0.5s ease;
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+.description {
+    font-size: 1.8rem;
+    color: #4682b4; 
+    margin-top: 15px;
+    text-shadow: 1px 1px #add8e6;
+}
+
+
+.audio-player {
+    margin-top: 20px;
+    width: 100%;
+    border-radius: 15px;
+    border: 3px solid #ffa07a;
+}

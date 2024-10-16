@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import './CSS/SavedImages.css'; 
 
 function SavedImages() {
   const [images, setImages] = useState([]);
@@ -18,13 +19,14 @@ function SavedImages() {
   }, []);
 
   return (
-    <div>
-      <h1>Saved Images!</h1>
-      <ul>
+    <div className="saved-images-container">
+      <h1 className="title">Saved Images!</h1>
+      <ul className="image-list">
         {images.map((image, index) => (
-          <li key={index}>
-            <p>Description: {image.description}</p>
-            <p>{new Date(image.createdAt).toLocaleString()}</p>
+          <li key={index} className="image-item">
+            <img src={image.url} alt="Saved" className="saved-image" />
+            <p className="description">Description: {image.description}</p>
+            <p className="date">{new Date(image.createdAt).toLocaleString()}</p>
           </li>
         ))}
       </ul>
