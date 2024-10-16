@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import ImageRow from './ImageRow';
+import ImageRow from './ImageTable.css';
 
 const ImageTable = ({ images, setImages }) => {
   const handleDelete = async (id) => {
