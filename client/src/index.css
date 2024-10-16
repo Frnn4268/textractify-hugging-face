@@ -1,68 +1,111 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
 
 body {
+  background: linear-gradient(135deg, #f5f7fa, #749bda); 
+  font-family: 'Patrick Hand', cursive; 
+  color: #333;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+
+nav {
+  background-color: #ffeb3b; 
+  padding: 10px 20px;
+  text-align: center;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px; 
+  width: 100%;
+  max-width: 800px;
+}
+
+
+nav ul {
+  list-style: none;
+  padding: 0;
   margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  justify-content: center;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+nav ul li {
+  margin: 0 15px;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+nav a {
+  text-decoration: none;
+  color: #333;
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #ff4500; 
+}
+
+/* Para centrar el contenido principal */
+.image-capture-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 25px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+
+.title {
+  font-size: 3rem;
+  color: #ff4500;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px #ffa07a;
+  animation: bounce 1.5s infinite;
+}
+
+.title-background {
+  background-image: url('https://png.pngtree.com/background/20230413/original/pngtree-dreamy-clouds-colorful-clouds-cartoon-illustration-sky-cute-background-picture-image_2422909.jpg');
+  background-size: cover;
+  background-position: center;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+/* Video centrado */
+.video-stream {
+  border: 6px solid #32cd32; /* Verde brillante */
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 500px; 
+  margin-bottom: 20px;
+}
+
+.capture-button, .toggle-button {
+  background-color: #ffeb3b; 
+  color: #333;
+  border: none;
+  padding: 15px 25px;
+  font-size: 1.5rem;
+  border-radius: 15px;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  margin: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.capture-button:hover, .toggle-button:hover {
+  background-color: #ffd700;
 }

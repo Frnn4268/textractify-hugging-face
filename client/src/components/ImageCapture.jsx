@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
+import './Css/ImageCapture.css'; 
 
 function ImageCapture() {
   const [image, setImage] = useState(null);
@@ -62,15 +63,17 @@ function ImageCapture() {
   };
 
   return (
-    <div>
-      <h1>Image Captioning</h1>
-      <video ref={videoRef} autoPlay style={{ width: '100%' }}></video>
-      <button onClick={handleCapture}>Capture Photo</button>
-      <button onClick={toggleCamera}>Toggle Camera</button>
+    <div className="image-capture-container">
+      <h1 className="title">Image Fun Time!</h1>
+      <video ref={videoRef} autoPlay className="video-stream"></video>
+      <div className="buttons-container">
+        <button className="capture-button" onClick={handleCapture}>📸 Capture Photo</button>
+        <button className="toggle-button" onClick={toggleCamera}>🔄 Switch Camera</button>
+      </div>
       <canvas ref={canvasRef} style={{ display: 'none' }} width="640" height="480"></canvas>
-      {image && <img src={image} alt="Captured" style={{ maxWidth: '100%' }} />}
-      {description && <p>{description}</p>}
-      {audioUrl && <audio controls src={audioUrl}></audio>} 
+      {image && <img src={image} alt="Captured" className="captured-image" />}
+      {description && <p className="description">{description}</p>}
+      {audioUrl && <audio controls src={audioUrl} className="audio-player"></audio>} 
     </div>
   );
 }
