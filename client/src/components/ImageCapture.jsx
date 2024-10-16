@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
-import './Css/ImageCapture.css'; 
+import './ImageCapture.css'; 
 
 function ImageCapture() {
   const [image, setImage] = useState(null);
