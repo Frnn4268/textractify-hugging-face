@@ -1,0 +1,47 @@
+
+tr {
+    transition: background-color 0.3s ease;
+  }
+  
+
+  tr:hover {
+    background-color: #ffebcd; 
+  }
+  
+  td img {
+    width: 100px;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  td img:hover {
+    transform: scale(1.1);
+  }
+  
+
+  td button {
+    background-color: #ff6347; 
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  td button:hover {
+    background-color: #e53e3e;
+  }
+  
+  td a {
+    color: #1e90ff; 
+    text-decoration: none;
+    font-size: 1.1rem;
+  }
+  
+  td a:hover {
+    color: #4682b4; 
+  }
+  
