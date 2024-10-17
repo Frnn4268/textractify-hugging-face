@@ -1,27 +1,122 @@
-
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
+  margin: 0;
   padding: 2rem;
-  text-align: center;
-  font-family: 'Patrick Hand', cursive; /* Fuente infantil */
-  background: linear-gradient(135deg, #f5f7fa, #c3cfe2); /* Fondo con gradiente */
+  font-family: 'Patrick Hand', cursive;
+  background: linear-gradient(135deg, #f0f8ff, #a2bdf3); 
   color: #333;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
 
 h1 {
   font-size: 3rem;
-  color: #ff6347; /* Rojo tomate brillante */
+  color: #ff6347; 
   margin-bottom: 30px;
-  text-shadow: 2px 2px #ffa07a; /* Sombra suave */
+  text-shadow: 2px 2px #ffa07a; 
+  text-align: center;
 }
 
-
 .app-container {
-  background-color: #fff5e6; /* Fondo suave */
+  background-color: #fff5e6;
   border-radius: 20px;
   padding: 20px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
+table {
+  width: 100%; 
+  border-collapse: collapse;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+th, td {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #ffeb3b;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+td {
+  font-size: 1rem;
+  color: #555;
+}
+
+tr:hover td {
+  background-color: #f0f8ff;
+}
+
+td a {
+  color: #ff4500;
+  text-decoration: none;
+}
+
+td a:hover {
+  color: #ff6347;
+}
+
+td button {
+  background-color: #ff6347; 
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+td button:hover {
+  background-color: #e53e3e;
+}
+
+td img {
+  width: 100px;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+td img:hover {
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem; 
+  }
+
+  .app-container {
+    padding: 10px;
+    width: 95%; 
+
+  table {
+    font-size: 0.9rem; 
+  }
+
+  td, th {
+    padding: 10px; 
+  }
+
+  td img {
+    width: 70px; 
+  }
+
+  td button {
+    padding: 8px 12px; 
+    font-size: 0.9rem; 
+  }
+}
