@@ -27,6 +27,18 @@ const uploadImage = async (req, res) => {
 
     console.log("Generated description:", result.generated_text);
 
+    const translation = await hf.translation({
+      model: 'facebook/mbart-large-50-many-to-many-mmt',
+      inputs: result.generated_text,
+      parameters: {
+        src_lang: 'en_XX', // English
+        tgt_lang: 'es_XX', // Spanish
+      },
+    });
+
+    const translatedText = translation.translation_text;
+    console.log("Descripción traducida a español:", translatedText);
+
     const textToSpeechResult = await hf.textToSpeech({
       model: 'espnet/kan-bayashi_ljspeech_vits',
       inputs: result.generated_text,
@@ -75,6 +87,7 @@ const uploadImage = async (req, res) => {
     // Save the description, audio URL, and image URL in the database
     const newImage = new Image({
       description: result.generated_text,
+      translatedDescription: translatedText,
       audioPath: audioUrl,
       imagePath: imageUrl // Save the image URL
     });

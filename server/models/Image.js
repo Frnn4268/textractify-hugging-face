@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const imageSchema = new mongoose.Schema({
   description: String,
+  translatedDescription: String,
   audioPath: String, 
   imagePath: String,
   createdAt: {
