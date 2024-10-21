@@ -24,8 +24,9 @@ function SavedImages() {
       <ul className="image-list">
         {images.map((image, index) => (
           <li key={index} className="image-item">
-            <img src={image.url} alt="Saved" className="saved-image" />
+            <img src={image.imagePath} alt="Saved" className="saved-image" />
             <p className="description">Description: {image.description}</p>
+            <p className="description">Translated Description: {image.translatedDescription}</p>
             <p className="date">{new Date(image.createdAt).toLocaleString()}</p>
           </li>
         ))}
