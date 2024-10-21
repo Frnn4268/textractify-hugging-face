@@ -4,6 +4,7 @@ const imageSchema = new mongoose.Schema({
   description: String,
   translatedDescription: String,
   audioPath: String, 
+  translatedAudioPath: String,
   imagePath: String,
   createdAt: {
     type: Date,
