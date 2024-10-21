@@ -6,6 +6,7 @@ const ImageRow = ({ image, onDelete }) => {
   return (
     <tr>
       <td>{image.description}</td>
+      <td>{image.translatedDescription}</td>
       <td><a href={image.audioPath} target="_blank" rel="noopener noreferrer">Listen</a></td>
       <td><a href={image.translatedAudioPath} target="_blank" rel="noopener noreferrer">Listen</a></td>
       <td>
