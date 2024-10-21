@@ -19,6 +19,7 @@ const ImageTable = ({ images, setImages }) => {
         <tr>
           <th>Description</th>
           <th>Audio URL</th>
+          <th>Translated Audio URL</th>
           <th>Image</th>
           <th>Actions</th>
         </tr>
