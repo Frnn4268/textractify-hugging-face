@@ -5,7 +5,9 @@ import './ImageCapture.css';
 function ImageCapture() {
   const [image, setImage] = useState(null);
   const [description, setDescription] = useState('');
+  const [translatedText, setTranslatedText] = useState('');
   const [audioUrl, setAudioUrl] = useState(''); 
+  const [translatedAudioUrl, setTranslatedAudioUrl] = useState('');
   const [useFrontCamera, setUseFrontCamera] = useState(false);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
@@ -52,7 +54,9 @@ function ImageCapture() {
         },
       });
       setDescription(response.data.description);
+      setTranslatedText(response.data.translatedDescription);
       setAudioUrl(response.data.audioPath); 
+      setTranslatedAudioUrl(response.data.translatedAudioPath);
     } catch (error) {
       console.error('Error uploading image:', error);
     }
@@ -73,7 +77,9 @@ function ImageCapture() {
       <canvas ref={canvasRef} style={{ display: 'none' }} width="640" height="480"></canvas>
       {image && <img src={image} alt="Captured" className="captured-image" />}
       {description && <p className="description">{description}</p>}
+      {translatedText && <p className="description">{translatedText}</p>}
       {audioUrl && <audio controls src={audioUrl} className="audio-player"></audio>} 
+      {translatedAudioUrl && <audio controls src={translatedAudioUrl} className="audio-player"></audio>} 
     </div>
   );
 }

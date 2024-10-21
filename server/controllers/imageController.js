@@ -115,7 +115,13 @@ const uploadImage = async (req, res) => {
     });
 
     await newImage.save();
-    res.json({ description: result.generated_text, audioPath: audioUrl, translatedAudioPath: translatedAudioUrl, imagePath: imageUrl });
+    res.json({
+      description: result.generated_text,
+      translatedDescription: translatedText,  // Agregado aquí
+      audioPath: audioUrl,
+      translatedAudioPath: translatedAudioUrl,
+      imagePath: imageUrl
+    });
 
     // Clean up the local files
     fs.unlinkSync(audioFilePath);
