@@ -28,7 +28,7 @@ jobs:
       - name: Docker Build and Publish
         uses: docker/build-push-action@v2
         with:
-          context: .
+          context: ./server
           file: ./server/Dockerfile
           push: true
           tags: frnn4268/server-textractify:${{github.run_number}}
