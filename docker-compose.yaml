@@ -15,7 +15,7 @@ services:
     image: client-textractify:latest
     build:
       context: ./client
-      dockerfile: Dockerfil
+      dockerfile: Dockerfile
     ports:
       - "80:80"
   
@@ -24,7 +24,7 @@ services:
     image: client-textractify-client:latest
     build:
       context: ./textractify-client
-      dockerfile: Dockerfil
+      dockerfile: Dockerfile
     ports:
       - "81:81"
 
