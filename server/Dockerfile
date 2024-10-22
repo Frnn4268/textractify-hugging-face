@@ -2,10 +2,10 @@
 FROM node:18
 
 # Config the working directory
-WORKDIR /app
+WORKDIR /usr/src/app
 
 # Copy the package.json and package-lock.json files
-COPY package*.json ./
+COPY package.json package-lock.json ./
 
 # Install dependencies
 RUN npm install

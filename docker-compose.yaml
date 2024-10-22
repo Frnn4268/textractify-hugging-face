@@ -3,6 +3,7 @@ version: '3.8'
 services:
   # Backend service
   backend:
+    image: server-textractify:latest
     build:
       context: ./server
     ports:
@@ -10,6 +11,7 @@ services:
 
   # Client service
   client:
+    image: client-textractify:latest
     build:
       context: ./client
     ports:
@@ -17,6 +19,7 @@ services:
   
   # Client Textractify service
   textractify-client:
+    image: client-textractify-client:latest
     build:
       context: ./textractify-client
     ports:
