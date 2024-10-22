@@ -31,4 +31,4 @@ jobs:
           context: .
           file: ./server/Dockerfile
           push: true
-          tags: frnn4268/server:${{github.run_number}}
+          tags: frnn4268/textractify-hugging-face-backend:${{github.run_number}}
