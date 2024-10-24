@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import './ImageCapture.css'; 
 
 function ImageCapture() {
@@ -12,6 +13,7 @@ function ImageCapture() {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
 
+  // UseEffect to get access to the camera stream 
   useEffect(() => {
     const getCameraStream = async () => {
       const constraints = {
@@ -31,7 +33,23 @@ function ImageCapture() {
     getCameraStream();
   }, [useFrontCamera]);
 
+  // Function to show a SweetAlert
+  const showLoadingAlert = () => {
+    Swal.fire({
+      title: 'Capturing!',
+      html: 'Please wait while we process your image...',
+      timerProgressBar: true,
+      showConfirmButton: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+  };
+
+  // Function to handle capturing a photo
   const handleCapture = () => {
+    showLoadingAlert(); 
+
     const canvas = canvasRef.current;
     const video = videoRef.current;
     const context = canvas.getContext('2d');
@@ -39,10 +57,11 @@ function ImageCapture() {
     canvas.toBlob(blob => {
       const file = new File([blob], 'captured_image.png', { type: 'image/png' });
       setImage(URL.createObjectURL(file));
-      handleImageUpload(file);
+      handleImageUpload(file); 
     }, 'image/png');
   };
 
+  // Function to upload the captured image to the backend
   const handleImageUpload = async (file) => {
     const formData = new FormData();
     formData.append('image', file);
@@ -53,17 +72,40 @@ function ImageCapture() {
           'Content-Type': 'multipart/form-data',
         },
       });
+
       setDescription(response.data.description);
       setTranslatedText(response.data.translatedDescription);
       setAudioUrl(response.data.audioPath); 
       setTranslatedAudioUrl(response.data.translatedAudioPath);
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Image Captured!',
+        text: 'The image has been processed successfully.',
+        confirmButtonText: 'Awesome!',
+      });
+
     } catch (error) {
       console.error('Error uploading image:', error);
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops!',
+        text: 'There was an error processing the image. Please try again.',
+        confirmButtonText: 'Got it',
+      });
     }
   };
 
   const toggleCamera = () => {
     setUseFrontCamera(prevState => !prevState);
+
+    Swal.fire({
+      icon: 'info',
+      title: 'Camera Switched!',
+      text: useFrontCamera ? 'You are now using the rear camera' : 'You are now using the front camera',
+      confirmButtonText: 'OK',
+    });
   };
 
   return (
