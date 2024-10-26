@@ -31,16 +31,20 @@ const ImageRow = ({ image, onDelete }) => {
 
   return (
     <tr>
-      <td>{image.description}</td>
-      <td>{image.translatedDescription}</td>
-      <td><a href={image.audioPath} target="_blank" rel="noopener noreferrer">Listen</a></td>
-      <td><a href={image.translatedAudioPath} target="_blank" rel="noopener noreferrer">Listen</a></td>
-      <td>
+      <td data-label="Description">{image.description}</td>
+      <td data-label="Translated Description">{image.translatedDescription}</td>
+      <td data-label="Audio URL">
+        <a href={image.audioPath} target="_blank" rel="noopener noreferrer">Listen</a>
+      </td>
+      <td data-label="Translated Audio URL">
+        <a href={image.translatedAudioPath} target="_blank" rel="noopener noreferrer">Listen</a>
+      </td>
+      <td data-label="Image">
         <a href={image.imagePath} target="_blank" rel="noopener noreferrer">
           <img src={image.imagePath} alt={image.description} style={{ width: '100px', height: 'auto' }} />
         </a>
       </td>
-      <td>
+      <td data-label="Actions">
         <button onClick={() => handleDeleteClick(image._id)}>Delete</button>
       </td>
     </tr>
